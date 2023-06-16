@@ -1,28 +1,37 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { deletContactsValue } from '../../redux/contactSlice';
-import { getContactsValue, getFilterValue } from '../../redux/selectors';
+import { useEffect } from 'react';
+import {
+  selectError,
+  selectFilteredContacts,
+  selectIsLoading,
+} from 'redux/selectors';
+import { fetchContacts, deleteContact } from 'redux/operations';
 import css from '../GlobalStyles.module.css';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContactsValue);
-  const filter = useSelector(getFilterValue);
+  const filteredContacts = useSelector(selectFilteredContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
-  const filteredContacts = contacts?.filter(contact =>
-    contact?.name?.toLowerCase().includes(filter.toLowerCase())
-  );
-  const onDeleteContact = contactId => {
-    dispatch(deletContactsValue(contactId));
+  useEffect(() => {
+    dispatch(fetchContacts()); // діспатчимо екшен
+  }, [dispatch]);
+
+  const onDeleteContact = id => {
+    dispatch(deleteContact(id)); // діспатчимо екшен
   };
-  if (!filteredContacts?.length) {
-    alert('No contacts matching your request');
-  }
   return (
     <ul className={css.contactList}>
-      {filteredContacts.map(({ id, name, number }) => (
+      {isLoading && <h2>...Loading</h2>}
+      {!filteredContacts?.length && !error && !isLoading && (
+        <h2>No contacts found.</h2>
+      )}
+      {error && <h2>{error}</h2>}
+      {filteredContacts.map(({ id, name, phone }) => (
         <li className={css.item} key={id}>
           <p>{name}: </p>
-          <p>{number}</p>
+          <p>{phone}</p>
           <button
             onClick={() => onDeleteContact(id)}
             className={css.contactsBtn}

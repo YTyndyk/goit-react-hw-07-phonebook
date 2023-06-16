@@ -1,6 +1,8 @@
 import ContactsList from './ContactsList';
 import Form from './ContactsForm';
 import Filter from './Filter';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import css from './GlobalStyles.module.css';
 
 const App = () => {
@@ -19,6 +21,7 @@ const App = () => {
       <h2 className={css.title}>Contacts</h2>
       <Filter />
       <ContactsList />
+      <ToastContainer position="top-center" />
     </div>
   );
 };
