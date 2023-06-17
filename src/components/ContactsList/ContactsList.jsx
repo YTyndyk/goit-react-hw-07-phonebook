@@ -7,6 +7,7 @@ import {
 } from 'redux/selectors';
 import { fetchContacts, deleteContact } from 'redux/operations';
 import css from '../GlobalStyles.module.css';
+import Loader from 'components/Loader/Loader';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
@@ -15,15 +16,15 @@ const ContactsList = () => {
   const error = useSelector(selectError);
 
   useEffect(() => {
-    dispatch(fetchContacts()); // діспатчимо екшен
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   const onDeleteContact = id => {
-    dispatch(deleteContact(id)); // діспатчимо екшен
+    dispatch(deleteContact(id));
   };
   return (
     <ul className={css.contactList}>
-      {isLoading && <h2>...Loading</h2>}
+      {isLoading && <Loader />}
       {!filteredContacts?.length && !error && !isLoading && (
         <h2>No contacts found.</h2>
       )}

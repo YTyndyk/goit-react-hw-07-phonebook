@@ -7,7 +7,6 @@ const initialState = {
   error: null,
 };
 
-// робимо 2 функції, щоб не дублювати код
 const handlePending = state => {
   return {
     ...state,
@@ -23,7 +22,6 @@ const handleRejected = (state, action) => {
   };
 };
 
-// розбиваємо на 3 функції, щоб не дублювати код
 const handleFetchContactsSuccess = (state, action) => {
   return { ...state, isLoading: false, error: null, items: action.payload };
 };
@@ -46,7 +44,6 @@ const handleDeleteContactSuccess = (state, action) => {
   };
 };
 
-// для кожного з цих екшенів буде створено actionCreator
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,

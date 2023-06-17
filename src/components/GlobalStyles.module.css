@@ -39,7 +39,7 @@
 .contactsBtn {
   max-width: 100px;
   padding: 2px 4px;
-  margin-left: 10px;
+  /* margin-left: 40px; */
   border-radius: 5px;
   padding: 4px 10px;
 }
@@ -51,7 +51,6 @@
 }
 .contactList {
   display: flex;
-  align-items: self;
   flex-direction: column;
   width: 450px;
   padding: 0;

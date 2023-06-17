@@ -28,8 +28,8 @@ const Form = () => {
       return toast.warn(`${contact.name} is already in contacts.`);
     }
 
-    dispatch(addContact(contact)); // діспатчимо екшен
-    event.currentTarget.reset(); // очищаємо форму
+    dispatch(addContact(contact));
+    event.currentTarget.reset();
   };
 
   return (
